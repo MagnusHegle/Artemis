@@ -311,16 +311,13 @@ public class DevicePropertiesTabViewModel : ActivatableViewModelBase
         }
         else
         {
-            List<LedLayout> ledLayouts = Device.Leds.Select(x =>
+            List<LedLayout> ledLayouts = Device.Leds.Select(x => new LedLayout()
             {
-                return new LedLayout()
-                {
-                    Id = x.RgbLed.Id.ToString(),
-                    DescriptiveX = x.Rectangle.Left.ToString(),
-                    DescriptiveY = x.Rectangle.Top.ToString(),
-                    DescriptiveWidth = $"{x.Rectangle.Width}mm",
-                    DescriptiveHeight = $"{x.Rectangle.Height}mm",
-                };
+                Id = x.RgbLed.Id.ToString(),
+                DescriptiveX = x.Rectangle.Left.ToString(),
+                DescriptiveY = x.Rectangle.Top.ToString(),
+                DescriptiveWidth = $"{x.Rectangle.Width}mm",
+                DescriptiveHeight = $"{x.Rectangle.Height}mm",
             }).ToList();
 
             DeviceLayout emptyLayout = new()
@@ -338,7 +335,11 @@ public class DevicePropertiesTabViewModel : ActivatableViewModelBase
             await using StreamWriter writer = new(result);
             serializer.Serialize(writer, emptyLayout);
         }
-
-        _notificationService.CreateNotification().WithMessage("Layout exported").WithTimeout(TimeSpan.FromSeconds(5)).Show();
+        
+        _notificationService.CreateNotification()
+            .WithMessage("Layout exported")
+            .WithTimeout(TimeSpan.FromSeconds(5))
+            .WithSeverity(NotificationSeverity.Success)
+            .Show();
     }
 }

@@ -180,11 +180,22 @@
                     </Button>
                 </Grid>
 
+                
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,10" >
+                    The Export button will export the current layout to a file that can be edited and shared with other users.
+                    If your device does not have a layout, or it has an incorrect one, the exported file can be edited to fix it.
+                    
+                </TextBlock>
+                
+                <TextBlock TextWrapping="Wrap" Margin="0,10,0,10" >
+                    The exported file will be placed by default in the path Artemis looks for, but you can also place it in a custom location.
+                </TextBlock>
+                
+                <Button Command="{CompiledBinding ExportLayout}">Export layout</Button>
+                
                 <controls:HyperlinkButton NavigateUri="https://wiki.artemis-rgb.com/en/guides/developer/layouts" Margin="0 20" HorizontalAlignment="Right">
                     Learn more about layouts on the wiki
                 </controls:HyperlinkButton>
-                
-                <Button Command="{CompiledBinding ExportLayout}">Export layout</Button>
             </StackPanel>
 
             <!-- Buttons -->
